@@ -15,14 +15,14 @@
 						<th>Email</th>
 						<th></th>
 					</tr>
-					@foreach($companies as $company)
+					@foreach($companies as $key => $company)
 					<tr>
 						<td>{{ $company->name }}</td>
-						<td><img src="{{ $company->logo }}" alt="{{ $company->name }}"></td>
+						<td><img src="{{ asset($company->logo) }}" alt="{{ $company->name }}"></td>
 						<td>{{ $company->website }}</td>
 						<td>{{ $company->email }}</td>
 						<td>
-							<a class="btn btn-primary" href="#" data-toggle="modal" data-target="editCompany">Edit</a>
+							<a class="btn btn-primary" href="#" data-toggle="modal" data-target="editCompany{{ $key }}">Edit</a>
 							<a class="btn btn-danger" href="#">Delete</a>
 						</td>
 					</tr>
@@ -37,7 +37,25 @@
 			</div>
 			<div class="card-body">
 				<table>
-					
+					<tr>
+						<th>Name</th>
+						<th>Company</th>
+						<th>Phone Number</th>
+						<th>Email</th>
+						<th></th>
+					</tr>
+					@foreach($employees as $key => $employee)
+					<tr>
+						<td>{{ $employee->first_name.' '.$employee->last_name }}</td>
+						<td>{{ $employee->company->name }}</td>
+						<td>{{ $employee->phone }}</td>
+						<td>{{ $employee->email }}</td>
+						<td>
+							<a class="btn btn-primary" href="#" data-toggle="modal" data-target="editCompany">Edit</a>
+							<a class="btn btn-danger" href="#">Delete</a>
+						</td>
+					</tr>
+					@endforeach
 				</table>
 			</div>
 		</div>
@@ -55,27 +73,46 @@
 	      <div class="modal-body">
 	        <center>
 	          <div>
-	            <p>Use this space to show clients you have the skills and experience they're looking for.</p>
-	            <ul>
-	              <li>Describe your strengths and skills</li>
-	              <li>Highlight projects, accomplishments and education</li>
-	              <li>Keep it short and make sure it's error-free</li>
-	            </ul>
-	          </div>
-	          <div>
-	            <form method="post" action="{{action('EmployerPostController@findAction')}}">
+	            <form method="post" action="">
 	              @csrf
-	              <textarea rows="10" cols="40" name="overview_description" placeholder="EXAMPLE: Laravel Web Developer">{{ $profile_info->overview_description }}</textarea>
-	            </div>
+	              <div class="row">
+	                <div class="col-sm-12">
+	                  <div class="form-group">
+	                    <div class="col-sm-12">
+	                      <div class="form-group">
+	                        <label>Company Name</label>
+	                        <input type="text" class="form-control" name="edit_company_name" value=""/>
+	                      </div>
+	                    </div>
+	                    <div class="col-sm-12">
+	                      <div class="form-group">
+	                        <label>Company Website</label>
+	                        <input type="text" class="form-control" name="edit_company_website" value=""/>
+	                      </div>
+	                    </div>
+	                    <div class="col-sm-12">
+	                      <div class="form-group">
+	                        <label>Number of Employees</label>
+	                        <input type="text" class="form-control" name="edit_number_of_employees" value=""/>
+	                      </div>
+	                    </div>
+	                    <div class="col-sm-12">
+	                      <div class="form-group">
+	                        <label>Company Description</label>
+	                        <input type="text" class="form-control" name="edit_company_description" value=""/>
+	                      </div>
+	                    </div>
+	                  </div>
+	                </div>
 
-	          </center>
+	              </center>
+	            </div>
+	            <div class="modal-footer">
+	              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	              <button type="submit" class="btn btn-primary">Save changes</button>
+	            </div>
+	          </form>
 	        </div>
-	        <div class="modal-footer">
-	          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-	          <button type="submit" class="btn btn-primary">Save changes</button>
-	        </div>
-	      </form>
+	      </div>
 	    </div>
-	  </div>
-	</div>
 @endsection

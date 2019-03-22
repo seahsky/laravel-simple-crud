@@ -43,10 +43,11 @@ class CompanyController extends Controller
         $logo = $request->file('company_logo');
         $extension = $logo->getClientOriginalExtension();
         Storage::disk('company_logo')->put($logo->getFileName().'.'.$extension, File::get($logo));
+        $path = Storage::disk('company_logo')->url($logo->getFileName());
 
         $company = new Company();
         $company->name = $request->company_name;
-        $company->logo = storage_path('app/public/images/company_logo').$logo->getFileName();
+        $company->logo = $path;
         $company->website = $request->company_website;
         $company->email = $request->company_email;
         $company->save();
@@ -88,10 +89,11 @@ class CompanyController extends Controller
         $logo = $request->file('edit_company_logo');
         $extension = $logo->getClientOriginalExtension();
         Storage::disk('edit_company_logo')->put($logo->getFileName().'.'.$extension, File::get($logo));
+        $path = Storage::disk('company_logo')->url($logo->getFileName());
 
         $company = Company::findOrFail($id);
         $company->name = $request->edit_company_name;
-        $company->logo = storage_path('app/public/images/company_logo').$logo->getFileName();
+        $company->logo = $path;
         $company->website = $request->edit_company_website;
         $company->email = $request->edit_company_email;
         $company->save();

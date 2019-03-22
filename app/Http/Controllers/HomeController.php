@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Employee;
+use App\Company;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -27,6 +29,8 @@ class HomeController extends Controller
     }
 
     public function adminPage(){
-        return view('adminpage');
+        $companies = Company::all();
+        $employees = Employee::all();
+        return view('adminpage', compact('companies', 'employees'));
     }
 }

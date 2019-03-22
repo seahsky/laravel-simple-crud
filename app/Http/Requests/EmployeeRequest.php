@@ -24,7 +24,11 @@ class EmployeeRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'first_name' => 'required|string|max:30',
+            'last_name' => 'required|string|max:30',
+            'company' => 'required|exists:companies,email',
+            'phone' => 'regex:/(01)[0-9]{9}/'
+            'website' => 'string|max:300',
         ];
     }
 }

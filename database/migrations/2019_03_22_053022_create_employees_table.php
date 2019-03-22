@@ -17,10 +17,12 @@ class CreateEmployeesTable extends Migration
             $table->bigIncrements('id');
             $table->string('first_name');
             $table->string('last_name');
-            $table->unsignedInteger('company_id');
+            $table->unsignedBigInteger('company_id');
             $table->string('email');
             $table->string('phone');
             $table->timestamps();
+
+            $table->foreign('company_id')->references('id')->on('companies');
         });
     }
 
