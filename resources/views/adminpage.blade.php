@@ -89,8 +89,7 @@
 				</table>
 			</div>
 			<div class="card-footer d-flex justify-content-center">
-				{{ $employees->links() }}
-				}
+				{{ $employees->links() }}				
 			</div>
 		</div>
 	</div>
@@ -114,29 +113,30 @@
 										<div class="form-group">
 											<div class="col-sm-12">
 												<div class="form-group">
-													<label>Company Name</label>
-													<input type="text" class="form-control" name="add_company_name" value="{{ old('add_company_name') }}"/>
+													<label><strong>Company Name</strong></label>
+													<input type="text" class="form-control" name="add_company_name" value="{{ old('add_company_name') }}" placeholder="e.g. Handa Sdn. Bhd." required/>
 												</div>
 											</div>
 											<div class="col-sm-12">
 												<div class="form-group">
-													<label>Company Logo</label>
+													<label><strong>Company Logo</strong></label>
 													<div>
 														<img src="{{ asset('storage/images/company_logo/sample-logo.png') }}" alt="Your Company Logo" id="add_company_logo_display" width="100px" height="100px">
 													</div>
-													<input type="file" class="form-control" name="add_company_logo" id="add_company_logo"/>
+													<br>
+													<input type="file" class="form-control" name="add_company_logo" id="add_company_logo" required/>
 												</div>
 											</div>
 											<div class="col-sm-12">
 												<div class="form-group">
-													<label>Company Website</label>
-													<input type="text" class="form-control" name="add_company_website" value="{{ old('add_company_website') }}"/>
+													<label><strong>Company Website</strong></label>
+													<input type="text" class="form-control" name="add_company_website" value="{{ old('add_company_website') }}" placeholder="e.g. www.handa.com.my" />
 												</div>
 											</div>
 											<div class="col-sm-12">
 												<div class="form-group">
-													<label>Company Email</label>
-													<input type="text" class="form-control" name="add_company_email" value="{{ old('add_company_email') }}"/>
+													<label><strong>Company Email</strong></label>
+													<input type="text" class="form-control" name="add_company_email" value="{{ old('add_company_email') }}" placeholder="e.g. handa@gmail.com" />
 												</div>
 											</div>
 										</div>
@@ -173,20 +173,20 @@
 										<div class="form-group">
 											<div class="col-sm-12">
 												<div class="form-group">
-													<label>First Name</label>
-													<input type="text" class="form-control" name="add_employee_first_name" value="{{ old('add_employee_first_name') }}"/>
+													<label><strong>First Name</strong></label>
+													<input type="text" class="form-control" name="add_employee_first_name" value="{{ old('add_employee_first_name') }}" placeholder="e.g. John" />
 												</div>
 											</div>
 											<div class="col-sm-12">
 												<div class="form-group">
-													<label>Last Name</label>
-													<input type="text" class="form-control" name="add_employee_last_name" value="{{ old('add_employee_last_name') }}"/>
+													<label><strong>Last Name</strong></label>
+													<input type="text" class="form-control" name="add_employee_last_name" value="{{ old('add_employee_last_name') }}" placeholder="e.g. Cena" />
 												</div>
 											</div>
 											<div class="col-sm-12">
 												<div class="form-group">
-													<label>Employee Company</label>
-													<select name="add_employee_company" id="add_employee_company">
+													<label><strong>Employee Company</strong></label>
+													<select class="form-control" name="add_employee_company" id="add_employee_company">
 														@foreach($companies as $company)
 														<option value="{{ $company->email }}" {{ old('add_employee_company') == $company->id ? ' selected' : '' }}>
 															{{ $company->name }}
@@ -197,14 +197,14 @@
 											</div>
 											<div class="col-sm-12">
 												<div class="form-group">
-													<label>Phone Number</label>
-													<input type="text" class="form-control" name="add_employee_phone" value="{{ old('add_employee_phone') }}"/>
+													<label><strong>Phone Number</strong></label>
+													<input type="text" class="form-control" name="add_employee_phone" value="{{ old('add_employee_phone') }}" placeholder="e.g. 0123465798 (without '-')" />
 												</div>
 											</div>
 											<div class="col-sm-12">
 												<div class="form-group">
-													<label>Employee Email</label>
-													<input type="text" class="form-control" name="add_employee_email" value="{{ old('add_employee_email') }}"/>
+													<label><strong>Employee Email</strong></label>
+													<input type="text" class="form-control" name="add_employee_email" value="{{ old('add_employee_email') }}" placeholder="e.g. johncena@gmail.com" />
 												</div>
 											</div>
 										</div>
@@ -243,28 +243,29 @@
 										<div class="form-group">
 											<div class="col-sm-12">
 												<div class="form-group">
-													<label>Company Name</label>
+													<label><strong>Company Name</strong></label>
 													<input type="text" class="form-control" name="company_name" value="{{ $company->name }}"/>
 												</div>
 											</div>
 											<div class="col-sm-12">
 												<div class="form-group">
-													<label>Company Logo</label>
+													<label><strong>Company Logo</strong></label>
 													<div>
 														<img src="{{ asset($company->logo) }}" alt="{{ $company->name }}" width="100px" height="100px">
 													</div>
+													<br>
 													<input type="file" class="form-control" name="company_logo"/>
 												</div>
 											</div>
 											<div class="col-sm-12">
 												<div class="form-group">
-													<label>Company Website</label>
+													<label><strong>Company Website</strong></label>
 													<input type="text" class="form-control" name="company_website" value="{{ $company->website }}"/>
 												</div>
 											</div>
 											<div class="col-sm-12">
 												<div class="form-group">
-													<label>Company Email</label>
+													<label><strong>Company Email</strong></label>
 													<input type="text" class="form-control" name="company_email" value="{{ $company->email }}"/>
 												</div>
 											</div>
@@ -305,20 +306,20 @@
 										<div class="form-group">
 											<div class="col-sm-12">
 												<div class="form-group">
-													<label>First Name</label>
+													<label><strong>First Name</strong></label>
 													<input type="text" class="form-control" name="employee_first_name" value="{{ $employee->first_name }}"/>
 												</div>
 											</div>
 											<div class="col-sm-12">
 												<div class="form-group">
-													<label>Last Name</label>
+													<label><strong>Last Name</strong></label>
 													<input type="text" class="form-control" name="employee_last_name" value="{{ $employee->last_name }}"/>
 												</div>
 											</div>
 											<div class="col-sm-12">
 												<div class="form-group">
-													<label>Employee Company</label>
-													<select name="employee_company" id="employee_company">
+													<label><strong>Employee Company</strong></label>
+													<select class="form-control" name="employee_company" id="employee_company">
 														@foreach($companies as $company)
 														<option value="{{ $company->email }}" {{ $employee->company->id == $company->id ? ' selected' : '' }}>
 															{{ $company->name }}
@@ -329,13 +330,13 @@
 											</div>
 											<div class="col-sm-12">
 												<div class="form-group">
-													<label>Phone Number</label>
+													<label><strong>Phone Number</strong></label>
 													<input type="text" class="form-control" name="employee_phone" value="{{ $employee->phone }}"/>
 												</div>
 											</div>
 											<div class="col-sm-12">
 												<div class="form-group">
-													<label>Employee Email</label>
+													<label><strong>Employee Email</strong></label>
 													<input type="text" class="form-control" name="employee_email" value="{{ $employee->email }}"/>
 												</div>
 											</div>
