@@ -1,4 +1,4 @@
-# testingAssignment
+# Laravel Simple CRUD
 
 This is a sample assignment found on : https://laraveldaily.com/test-junior-laravel-developer-sample-project/
 
