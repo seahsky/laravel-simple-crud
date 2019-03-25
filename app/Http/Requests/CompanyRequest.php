@@ -13,7 +13,7 @@ class CompanyRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,13 +21,34 @@ class CompanyRequest extends FormRequest
      *
      * @return array
      */
+
     public function rules()
     {
+        if($this->isMethod('post')) {
+            return $this->createRules();
+        }
+        else if ($this->isMethod('put')) {
+            return $this->updateRules();
+        }
+    }
+
+    public function createRules()
+    {
         return [
-            'name' => 'required|string|max:30',
-            'email' => 'email',
-            'logo' => 'dimensions:min_width=100,min_height=100',
-            'website' => 'string|max:100'
+            'add_company_name' => 'required|string|max:30',
+            'add_company_email' => 'required|email',
+            'add_company_logo' => 'required|image|mimes:jpeg,png,jpg,gif|dimensions:min_width=100,min_height=100',
+            'add_company_website' => 'required|string|max:100'
+        ];
+    }
+
+    public function updateRules()
+    {
+        return [
+            'company_name' => 'required|string|max:30',
+            'company_email' => 'required|email',
+            'company_logo' => 'image|mimes:jpeg,png,jpg,gif|dimensions:min_width=100,min_height=100',
+            'company_website' => 'required|string|max:100'
         ];
     }
 }

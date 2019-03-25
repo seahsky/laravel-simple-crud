@@ -29,8 +29,8 @@ class HomeController extends Controller
     }
 
     public function adminPage(){
-        $companies = Company::all();
-        $employees = Employee::all();
+        $companies = Company::paginate(10, ['*'], 'company');
+        $employees = Employee::paginate(10, ['*'], 'employee');
         return view('adminpage', compact('companies', 'employees'));
     }
 }

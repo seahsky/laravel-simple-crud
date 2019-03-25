@@ -40,11 +40,13 @@ class EmployeeController extends Controller
         $validated = $request->validated();
 
         $employee = new Employee();
-        $employee->name = $request->employee_name;
-        $employee->company_id = Company::where('email', $request->company)->pluck('id');
-        $employee->phone = $request->phone;
-        $employee->email = $request->email;
+        $employee->first_name = $request->input('add_employee_first_name');
+        $employee->last_name = $request->input('add_employee_last_name');
+        $employee->company_id = Company::where('email', $request->input('add_employee_company'))->pluck('id')[0];
+        $employee->phone = $request->input('add_employee_phone');
+        $employee->email = $request->input('add_employee_email');
         $employee->save();
+        return back();
     }
 
     /**
@@ -81,11 +83,13 @@ class EmployeeController extends Controller
         $validated = $request->validated();
 
         $employee = Employee::findOrFail($id);
-        $employee->name = $request->employee_name;
-        $employee->company_id = Company::where('email', $request->company)->pluck('id');
-        $employee->phone = $request->phone;
-        $employee->email = $request->email;
+        $employee->first_name = $request->input('employee_first_name');
+        $employee->last_name = $request->input('employee_last_name');
+        $employee->company_id = Company::where('email', $request->input('employee_company'))->pluck('id')[0];
+        $employee->phone = $request->input('employee_phone');
+        $employee->email = $request->input('employee_email');
         $employee->save();
+        return back();
     }
 
     /**
@@ -97,5 +101,6 @@ class EmployeeController extends Controller
     public function destroy($id)
     {
         Employee::destroy($id);
+        return back();
     }
 }

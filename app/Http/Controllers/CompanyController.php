@@ -40,17 +40,19 @@ class CompanyController extends Controller
     {
         $validated = $request->validated();
 
-        $logo = $request->file('company_logo');
-        $extension = $logo->getClientOriginalExtension();
-        Storage::disk('company_logo')->put($logo->getFileName().'.'.$extension, File::get($logo));
-        $path = Storage::disk('company_logo')->url($logo->getFileName());
-
         $company = new Company();
-        $company->name = $request->company_name;
-        $company->logo = $path;
-        $company->website = $request->company_website;
-        $company->email = $request->company_email;
+
+        if($request->hasFile('add_company_logo')) {
+            $logo = $request->file('add_company_logo');
+            $extension = $logo->getClientOriginalExtension();            
+            $path = 'storage/images/company_logo/'.$request->add_company_logo->store('', 'company_logo');
+            $company->logo = $path;
+        }
+        $company->name = $request->input('add_company_name');
+        $company->website = $request->input('add_company_website');
+        $company->email = $request->input('add_company_email');
         $company->save();
+        return back();
     }
 
     /**
@@ -86,17 +88,20 @@ class CompanyController extends Controller
     {
         $validated = $request->validated();
 
-        $logo = $request->file('edit_company_logo');
-        $extension = $logo->getClientOriginalExtension();
-        Storage::disk('edit_company_logo')->put($logo->getFileName().'.'.$extension, File::get($logo));
-        $path = Storage::disk('company_logo')->url($logo->getFileName());
-
         $company = Company::findOrFail($id);
-        $company->name = $request->edit_company_name;
-        $company->logo = $path;
-        $company->website = $request->edit_company_website;
-        $company->email = $request->edit_company_email;
+
+        if($request->hasFile('company_logo')) {
+            $logo = $request->file('company_logo');
+            $extension = $logo->getClientOriginalExtension();            
+            $path = 'storage/images/company_logo/'.$request->company_logo->store('', 'company_logo');
+            $company->logo = $path;
+        }
+        $company->name = $request->input('company_name');        
+        $company->website = $request->input('company_website');
+        $company->email = $request->input('company_email');
         $company->save();
+
+        return back();
     }
 
     /**
@@ -108,5 +113,6 @@ class CompanyController extends Controller
     public function destroy($id)
     {
         Company::destroy($id);
+        return back();
     }
 }
