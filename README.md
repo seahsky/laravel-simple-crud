@@ -1,4 +1,7 @@
 # testingAssignment
+
+This is a sample assignment found on : https://laraveldaily.com/test-junior-laravel-developer-sample-project/
+
 Installation
 
 1) Clone this repository
