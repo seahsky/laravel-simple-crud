@@ -14,6 +14,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/reset', function () {
+    \Artisan::call('migrate:refresh',['--seed' => ' ']);
+    return back();
+})->name('reset');
 
 Auth::routes();
 
